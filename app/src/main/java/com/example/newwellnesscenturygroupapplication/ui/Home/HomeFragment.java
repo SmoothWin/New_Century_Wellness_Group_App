@@ -32,6 +32,7 @@ public class HomeFragment extends Fragment {
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         final TextView textView = root.findViewById(R.id.text_home2);
+        searchView = root.findViewById(R.id.searchViewID);
         listView = root.findViewById(R.id.list_view);
         CarNames = getResources().getStringArray(R.array.car_names);
 
@@ -42,12 +43,26 @@ public class HomeFragment extends Fragment {
         //Attaching the adapter to the ListView for processing
         listView.setAdapter(arrayAdapter);
 
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                arrayAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+
 
         homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
             }
+
         });
         return root;
     }
