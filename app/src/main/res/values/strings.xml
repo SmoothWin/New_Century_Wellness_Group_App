@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">NewWellnessCenturyGroupApplication</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">Management Center</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="view_all">View All Reports</string>
+    <string name="add_report">Add new report</string>
+    <string name="add_patient">Add Patient</string>
+    <string name="about_us">About Us</string>
+
+
+    <!-- Array for listView testing (not official) -->
+    <string-array name="car_names">
+        <item>Alfa Romeo Giulia</item>
+        <item>Bentley Continental GT</item>
+        <item>Pagani Huayra</item>
+        <item>Lexus LFA</item>
+        <item>Ford Mustang GT500</item>
+        <item>Ford GT</item>
+        <item>BMW M5</item>
+        <item>Mercedes AMG</item>
+        <item>Porsche 918 Spyder</item>
+        <item>BAC Mono</item>
+        <item>Spyker C8 Preliator</item>
+        <item>Lykan Hypersport</item>
+        <item>Bugatti Divo</item>
+        <item>Rolls-Royce Phantom</item>
+        <item>Jaguar XE Project 8</item>
+        <item>Chervolet Corvette</item>
+        <item>Tesla Model S</item>
+    </string-array>
+
+</resources>

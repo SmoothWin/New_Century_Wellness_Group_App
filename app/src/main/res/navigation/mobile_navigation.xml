@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.newwellnesscenturygroupapplication.ui.Home.HomeFragment"
+        android:label="@string/view_all"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_gallery"
+        android:name="com.example.newwellnesscenturygroupapplication.ui.AddReportView.AddReportFragment"
+        android:label="@string/add_report"
+        tools:layout="@layout/fragment_addnewreport" />
+
+    <fragment
+        android:id="@+id/nav_slideshow"
+        android:name="com.example.newwellnesscenturygroupapplication.ui.AboutUs.AboutUsFragment"
+        android:label="@string/about_us"
+        tools:layout="@layout/fragment_aboutus" />
+    <fragment
+        android:id="@+id/nav_patient"
+        android:name="com.example.newwellnesscenturygroupapplication.ui.AddPatientView.AddPatientFragment"
+        android:label="@string/add_patient"
+        tools:layout="@layout/fragment_addnewpatient" />
+</navigation>
