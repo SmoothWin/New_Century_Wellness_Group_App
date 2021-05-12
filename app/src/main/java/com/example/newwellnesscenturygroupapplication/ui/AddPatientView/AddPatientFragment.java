@@ -85,7 +85,7 @@ public class AddPatientFragment extends Fragment {
 
         //------------- Set the button --------------\\
         addPatient = root.findViewById(R.id.add_patient);
-        selectDateButton = root.findViewById(R.id.selectDateButton);
+
 
         addPatient.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,12 +136,18 @@ public class AddPatientFragment extends Fragment {
                 }
                 else {
                     int pId = myDBHelper.createPatient(pName, pDob, pPhone, pEmail, pAddress, pMin);
-                    if (pId != -1) {
+                    if (pId != -1)
+                    {
                         clearInputs();
 
                         Report report = new Report(pId, "");
                         int rId = myDBHelper.createReport(report);
 
+<<<<<<< HEAD
+                        int rId = myDBHelper.createReport(report);
+
+=======
+>>>>>>> 2495281a9fdc5f0c3db64388a5b064c0974afd8d
                         AddReportFragment addReportFragment = new AddReportFragment();
                         Bundle bundle = new Bundle();
                         bundle.putInt("pId", pId);
@@ -152,6 +158,11 @@ public class AddPatientFragment extends Fragment {
                                 .commit();
 
                     }
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> 2495281a9fdc5f0c3db64388a5b064c0974afd8d
                 }
             }
         });
