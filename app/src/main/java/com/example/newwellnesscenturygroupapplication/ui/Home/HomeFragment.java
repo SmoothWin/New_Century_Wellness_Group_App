@@ -64,7 +64,7 @@ public class HomeFragment extends Fragment {
         //------------- Set the database connection --------------\\
         myDBHelper = new MyDBHelper(this.getContext());
         sqLiteDatabase = myDBHelper.getWritableDatabase();
-        //myDBHelper.onUpgrade(sqLiteDatabase, 1, 2);
+//        myDBHelper.onUpgrade(sqLiteDatabase, 1, 2);
 
 
         //------------- Setup ArrayList --------------\\

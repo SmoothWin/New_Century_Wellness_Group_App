@@ -48,6 +48,7 @@
             android:id="@+id/dateOfBirthEdt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:editable="false"
             android:ems="10"
             android:hint="Date of birth:"></EditText>
 
@@ -73,8 +74,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Enter email:" >
-    </EditText>
+        android:hint="Enter email address:"></EditText>
 
     <!-- ============ Address ================ -->
     <EditText
@@ -82,8 +82,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Enter address:" >
-    </EditText>
+        android:hint="Enter street address:"></EditText>
 
     <!-- ============ MIN ================ -->
 
@@ -92,7 +91,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Enter medical insurance number (MIN):"></EditText>
+        android:hint="Enter MIN (12 numbers):"></EditText>
 
     <Button
         android:id="@+id/add_patient"
@@ -100,5 +99,13 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="Create new patient" />
+
+    <TextView
+        android:id="@+id/Error"
+        android:layout_width="match_parent"
+        android:layout_height="370dp"
+        android:gravity="center_horizontal"
+        android:textColor="#FF0000"
+        android:textSize="14sp" />
 
 </LinearLayout>

@@ -105,7 +105,7 @@ public class PatientAggregateFragment extends Fragment {
                 Patient patient = myDBHelper.getPatient(pId);
 
                 patient.setName(patientNameEditText.getText().toString());
-                patient.setDateOfBirth(Date.valueOf(patientDobEditText.getText().toString()));
+                patient.setDateOfBirth(patientDobEditText.getText().toString());
 
                 int affectedReportRow = myDBHelper.updateReport(report);
                 int affectedPatientRow = myDBHelper.updatePatient(patient);

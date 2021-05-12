@@ -8,14 +8,14 @@ public class Patient {
     private String name;
     private String email;
     private String phoneNumber;
-    private Date dateOfBirth;
+    private String dateOfBirth;
     private String address;
     private String MIN;
 
     public Patient() {
     }
 
-    public Patient(int patientId, String name, String email, String phoneNumber, Date dateOfBirth, String address, String MIN) {
+    public Patient(int patientId, String name, String email, String phoneNumber, String dateOfBirth, String address, String MIN) {
         this.patientId = patientId;
         this.name = name;
         this.email = email;
@@ -25,7 +25,7 @@ public class Patient {
         this.MIN = MIN;
     }
 
-    public Patient(String name, String email, String phoneNumber, Date dateOfBirth, String address, String MIN) {
+    public Patient(String name, String email, String phoneNumber, String dateOfBirth, String address, String MIN) {
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
@@ -34,17 +34,9 @@ public class Patient {
         this.MIN = MIN;
     }
 
-    public Patient(int patientId, String name, Date dateOfBirth) {
+    public Patient(int patientId, String name, String dateOfBirth) {
         this.patientId = patientId;
         this.name = name;
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    public Date getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -78,6 +70,14 @@ public class Patient {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     public String getAddress() {

@@ -6,14 +6,14 @@ public class Report {
 
     private int reportId;
     private int patientId;
-    private Date dateCreated;
-    private Date dateModified;
+    private String dateCreated;
+    private String dateModified;
     private String details;
 
     public Report() {
     }
 
-    public Report(int reportId, int patientId, Date dateCreated, Date dateModified, String details) {
+    public Report(int reportId, int patientId, String dateCreated, String dateModified, String details) {
         this.reportId = reportId;
         this.patientId = patientId;
         this.dateCreated = dateCreated;
@@ -48,19 +48,19 @@ public class Report {
         this.patientId = patientId;
     }
 
-    public Date getDateCreated() {
+    public String getDateCreated() {
         return dateCreated;
     }
 
-    public void setDateCreated(Date dateCreated) {
+    public void setDateCreated(String dateCreated) {
         this.dateCreated = dateCreated;
     }
 
-    public Date getDateModified() {
+    public String getDateModified() {
         return dateModified;
     }
 
-    public void setDateModified(Date dateModified) {
+    public void setDateModified(String dateModified) {
         this.dateModified = dateModified;
     }
 
