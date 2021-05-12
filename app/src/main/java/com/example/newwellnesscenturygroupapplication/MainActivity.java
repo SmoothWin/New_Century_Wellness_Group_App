@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(this, AddPatientFragment.class);
+                Intent i = new Intent(getBaseContext(),AddPatientFragment.class);
                 startActivity(i);
             }
         });
