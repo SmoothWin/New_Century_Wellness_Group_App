@@ -102,21 +102,13 @@
 
         <EditText
             android:id="@+id/dateOfBirthEdt"
-            android:layout_width="76dp"
+            android:layout_width="186dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:editable="false"
             android:ems="0"
             android:textSize="18sp"></EditText>
 
-        <Button
-            android:id="@+id/selectDateButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:layout_weight="1"
-            android:text="Change"
-            android:textSize="12sp" />
     </LinearLayout>
 
     <EditText

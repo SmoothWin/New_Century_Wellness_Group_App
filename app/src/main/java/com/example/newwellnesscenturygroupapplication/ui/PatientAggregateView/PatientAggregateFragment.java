@@ -48,7 +48,7 @@ public class PatientAggregateFragment extends Fragment {
     private String dModified;
     private String dCreated;
 
-    private Button selectDateButton, updateReportButton, deleteReportButton;
+    private Button updateReportButton, deleteReportButton;
 
     private DatePickerDialog datePickerDialog;
 
@@ -73,7 +73,6 @@ public class PatientAggregateFragment extends Fragment {
         dModifiedEditText = root.findViewById(R.id.dateModified_edt);
         dCreatedEditTExt = root.findViewById(R.id.dateCreated_edt);
 
-        selectDateButton = root.findViewById(R.id.selectDateButton);
         updateReportButton = root.findViewById(R.id.updateReportButton);
         deleteReportButton = root.findViewById(R.id.deleteReportButton);
 
@@ -135,30 +134,34 @@ public class PatientAggregateFragment extends Fragment {
             }
         });
 
-        selectDateButton.setOnClickListener(new View.OnClickListener() {
+        patientDobEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void onClick(View v) {
-                //showToast("selectDate OnClick");
-                DatePicker datePicker = new DatePicker(getContext());
-                int currentDay = datePicker.getDayOfMonth();
-                int currentMonth = datePicker.getMonth();
-                int currentYear = datePicker.getYear();
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    DatePicker datePicker = new DatePicker(getContext());
+                    int currentDay = datePicker.getDayOfMonth();
+                    int currentMonth = datePicker.getMonth();
+                    int currentYear = datePicker.getYear();
 
-                datePickerDialog = new DatePickerDialog(getContext(),
-                        new DatePickerDialog.OnDateSetListener() {
-                            @Override
-                            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                    datePickerDialog = new DatePickerDialog(getContext(),
+                            new DatePickerDialog.OnDateSetListener() {
+                                @Override
+                                public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 
-                                String fixedMonth = (month + 1) < 10 ? "0" + (month +1) : String.valueOf(month + 1);
-                                String fixedDay = dayOfMonth < 10 ? "0" + dayOfMonth : String.valueOf(dayOfMonth);
+                                    String fixedMonth = (month + 1) < 10 ? "0" + (month +1) : String.valueOf(month + 1);
+                                    String fixedDay = dayOfMonth < 10 ? "0" + dayOfMonth : String.valueOf(dayOfMonth);
 
-                                patientDobEditText.setText(year + "-" + fixedMonth + "-" + fixedDay);
-                            }
-                        }, currentYear, currentMonth, currentDay);
+                                    patientDobEditText.setText(year + "-" + fixedMonth + "-" + fixedDay);
+                                }
+                            }, currentYear, currentMonth, currentDay);
 
-                datePickerDialog.show();
+                    datePickerDialog.show();
+                }
             }
         });
+                //showToast("selectDate OnClick");
+
+
 
         return root;
 

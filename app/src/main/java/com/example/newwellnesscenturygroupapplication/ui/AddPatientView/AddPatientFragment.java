@@ -85,7 +85,7 @@ public class AddPatientFragment extends Fragment {
 
         //------------- Set the button --------------\\
         addPatient = root.findViewById(R.id.add_patient);
-        selectDateButton = root.findViewById(R.id.selectDateButton);
+
 
         addPatient.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,34 +136,27 @@ public class AddPatientFragment extends Fragment {
                 }
                 else {
                     int pId = myDBHelper.createPatient(pName, pDob, pPhone, pEmail, pAddress, pMin);
-                    if (pId != -1) {
+                    if (pId != -1)
+                    {
                         clearInputs();
                         //textView.setText("69");
 
                         Report report = new Report(pId, "");
 
-                        myDBHelper.createReport(report);
+                        int rId = myDBHelper.createReport(report);
 
-//                    AddReportFragment addReportFragment = new AddReportFragment();
-//                    Bundle bundle = new Bundle();
-//                    bundle.putInt("pId", pId);
-//                    addReportFragment.setArguments(bundle);
-//                    FragmentManager manager = getParentFragmentManager();
-//                    manager.beginTransaction().replace(R.id.nav_host_fragment, addReportFragment, addReportFragment.getTag())
-//                            .commit();
+                        AddReportFragment addReportFragment = new AddReportFragment();
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("pId", pId);
+                        bundle.putInt("rId", rId);
+                        addReportFragment.setArguments(bundle);
+                        FragmentManager manager = getParentFragmentManager();
+                        manager.beginTransaction().replace(R.id.nav_host_fragment, addReportFragment, addReportFragment.getTag())
+                                .commit();
+
                     }
-                }
 
-                    int rId = myDBHelper.createReport(report);
 
-                    AddReportFragment addReportFragment = new AddReportFragment();
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("pId", pId);
-                    bundle.putInt("rId", rId);
-                    addReportFragment.setArguments(bundle);
-                    FragmentManager manager = getParentFragmentManager();
-                    manager.beginTransaction().replace(R.id.nav_host_fragment, addReportFragment, addReportFragment.getTag())
-                            .commit();
                 }
             }
         });
