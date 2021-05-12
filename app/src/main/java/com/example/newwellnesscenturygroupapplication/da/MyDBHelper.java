@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
-import java.sql.Date;
+import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
@@ -266,7 +266,7 @@ public class MyDBHelper extends SQLiteOpenHelper {
                         result.getString(result.getColumnIndex(NAME)),
                         result.getString(result.getColumnIndex(EMAIL)),
                         result.getString(result.getColumnIndex(PHONE_NUMBER)) ,
-                        Date.valueOf(result.getString(result.getColumnIndex(DOB))),
+                        result.getString(result.getColumnIndex(DOB)),
                         result.getString(result.getColumnIndex(ADDRESS)),
                         result.getString(result.getColumnIndex(MIN)));
             }
@@ -296,8 +296,8 @@ public class MyDBHelper extends SQLiteOpenHelper {
             while (result.moveToNext()){
                 report = new Report(result.getInt(result.getColumnIndex(report_ID)),
                         result.getInt(result.getColumnIndex(patient_ID)),
-                        Date.valueOf(result.getString(result.getColumnIndex(DATE_CREATED))),
-                        Date.valueOf(result.getString(result.getColumnIndex(DATE_MODIFIED))),
+                        result.getString(result.getColumnIndex(DATE_CREATED)),
+                        result.getString(result.getColumnIndex(DATE_MODIFIED)),
                         result.getString(result.getColumnIndex(DETAILS)));
             }
 

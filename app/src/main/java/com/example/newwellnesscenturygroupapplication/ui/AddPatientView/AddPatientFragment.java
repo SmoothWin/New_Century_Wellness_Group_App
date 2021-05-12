@@ -26,6 +26,7 @@ import com.example.newwellnesscenturygroupapplication.da.Report;
 import com.example.newwellnesscenturygroupapplication.ui.AddReportView.AddReportFragment;
 
 import java.sql.Date;
+import java.util.regex.Pattern;
 
 public class AddPatientFragment extends Fragment {
 
@@ -35,7 +36,8 @@ public class AddPatientFragment extends Fragment {
     private SQLiteDatabase sqLiteDatabase;
 
 
-
+    //------------- TextView parameters --------------\\
+    TextView error;
     //------------- EditText parameters --------------\\
     EditText nameEdt,
             phoneEdt,
@@ -55,9 +57,8 @@ public class AddPatientFragment extends Fragment {
     private AddPatientViewModel AddPatientViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
-            ViewGroup container, Bundle savedInstanceState) {
+                             ViewGroup container, Bundle savedInstanceState) {
         AddPatientViewModel = new ViewModelProvider(this).get(AddPatientViewModel.class);
-
 
 
         //------------- Get the root link --------------\\
@@ -65,6 +66,8 @@ public class AddPatientFragment extends Fragment {
 
         //------------- Get the TextView --------------\\
         final TextView textView = root.findViewById(R.id.text_gallery);
+
+        error = root.findViewById(R.id.Error);
 
         //------------- Set the database connection --------------\\
         myDBHelper = new MyDBHelper(this.getContext());
@@ -87,24 +90,69 @@ public class AddPatientFragment extends Fragment {
         addPatient.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String pName = nameEdt.getText().toString();
-                String pEmail = emailEdt.getText().toString();
-                String pPhone = phoneEdt.getText().toString();
-                Date pDob = Date.valueOf(dobEdt.getText().toString());
-                String pAddress = addressEdt.getText().toString();
-                String pMin = minEdt.getText().toString();
+                String pName = nameEdt.getText().toString().trim();
+                String pEmail = emailEdt.getText().toString().trim();
+                String pPhone = phoneEdt.getText().toString().trim();
+                String pDob = dobEdt.getText().toString();
+                String pAddress = addressEdt.getText().toString().trim();
+                String pMin = minEdt.getText().toString().trim();
 
-                Patient patient = new Patient(pName, pEmail, pPhone, pDob, pAddress, pMin);
+                String errorMsg = "";
+                if(pName.isEmpty()
+                        ||!Pattern.matches("^([A-Z]|[a-z])*$", pName) && !pName.isEmpty()
+                        ||pDob.isEmpty()
+                        ||!Pattern.matches("[0-9]{3}[0-9]{3}[0-9]{4}", pPhone)
+                        ||!Pattern.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", pEmail)
+                        ||!Pattern.matches("\\d+[ ](?:[A-Za-z0-9.-]+[ ]?)+", pAddress)
+                        ||!Pattern.matches("[0-9]{12}", pMin)) {
+                    if (pName.isEmpty()) {
+                        errorMsg += "Name input is empty.\n\n";
+                        error.setText(errorMsg);
+                    }
+                    if (!Pattern.matches("^([A-Z]|[a-z])*$", pName) && !pName.isEmpty()) {
+                        errorMsg += "Name should be only composed of characters\n\n";
+                        error.setText(errorMsg);
+                    }
+                    if (pDob.isEmpty()) {
+                        errorMsg += "Please enter a date\n\n";
+                        error.setText(errorMsg);
+                    }
+                    if (!Pattern.matches("[0-9]{3}[0-9]{3}[0-9]{4}", pPhone)) {
+                        errorMsg += "Phone number is invalid\n\n";
+                        error.setText(errorMsg);
+                    }
+                    if (!Pattern.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", pEmail)) {
+                        errorMsg += "Email address is invalid\n\n";
+                        error.setText(errorMsg);
+                    }
+                    if (!Pattern.matches("\\d+[ ](?:[A-Za-z0-9.-]+[ ]?)+", pAddress)) {
+                        errorMsg += "Address is invalid\n\n";
+                        error.setText(errorMsg);
+                    }
+                    if (!Pattern.matches("[0-9]{12}", pMin)) {
+                        errorMsg += "MIN number is invalid(must have 12 numbers)\n\n";
+                        error.setText(errorMsg);
+                    }
+                }
+                else {
+                    int pId = myDBHelper.createPatient(pName, pDob, pPhone, pEmail, pAddress, pMin);
+                    if (pId != -1) {
+                        clearInputs();
+                        //textView.setText("69");
 
-                int pId = myDBHelper.createPatient(pName, pDob.toString(), pPhone, pEmail, pAddress, pMin);
+                        Report report = new Report(pId, "");
 
+                        myDBHelper.createReport(report);
 
-
-                if(pId != -1){
-                    clearInputs();
-                    //textView.setText("69");
-
-                    Report report = new Report(pId, "");
+//                    AddReportFragment addReportFragment = new AddReportFragment();
+//                    Bundle bundle = new Bundle();
+//                    bundle.putInt("pId", pId);
+//                    addReportFragment.setArguments(bundle);
+//                    FragmentManager manager = getParentFragmentManager();
+//                    manager.beginTransaction().replace(R.id.nav_host_fragment, addReportFragment, addReportFragment.getTag())
+//                            .commit();
+                    }
+                }
 
                     int rId = myDBHelper.createReport(report);
 
@@ -155,7 +203,7 @@ public class AddPatientFragment extends Fragment {
         return root;
     }
 
-    private void clearInputs(){
+    private void clearInputs() {
         nameEdt.setText("");
         dobEdt.setText("");
         phoneEdt.setText("");
@@ -164,11 +212,9 @@ public class AddPatientFragment extends Fragment {
         minEdt.setText("");
     }
 
-    private void showToast(String message)
-    {
+    private void showToast(String message) {
         Toast.makeText(this.getContext(), message, Toast.LENGTH_LONG).show();
     }
-
 
 
 }
