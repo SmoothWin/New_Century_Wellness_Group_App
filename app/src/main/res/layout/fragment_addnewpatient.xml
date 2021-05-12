@@ -37,15 +37,28 @@
     <!-- ============ Last Name ================ -->
 
     <!-- ============ Date of birth ================ -->
-    <EditText
-        android:id="@+id/dob_edt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Enter date of birth:" >
-    </EditText>
 
     <!-- ============ Phone Number ================ -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/dob_edt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Date of birth:"></EditText>
+
+        <Button
+            android:id="@+id/selectDateButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Select Date" />
+    </LinearLayout>
+
     <EditText
         android:id="@+id/phone_edt"
         android:layout_width="match_parent"
@@ -87,4 +100,5 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="Create new patient" />
+
 </LinearLayout>

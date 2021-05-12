@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.widget.ListView;
 import android.widget.SearchView;
 
+import com.example.newwellnesscenturygroupapplication.da.MyDBHelper;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private String[] CarNames;
     private SearchView searchView;
 
+    private static MyDBHelper myDBHelper;
 
     private AppBarConfiguration mAppBarConfiguration;
 
@@ -72,5 +74,9 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    public void onBackPressed(){
+
     }
 }
