@@ -107,11 +107,12 @@ public class AddPatientFragment extends Fragment {
 
                     Report report = new Report(pId, "");
 
-                    myDBHelper.createReport(report);
+                    int rId = myDBHelper.createReport(report);
 
                     AddReportFragment addReportFragment = new AddReportFragment();
                     Bundle bundle = new Bundle();
                     bundle.putInt("pId", pId);
+                    bundle.putInt("rId", rId);
                     addReportFragment.setArguments(bundle);
                     FragmentManager manager = getParentFragmentManager();
                     manager.beginTransaction().replace(R.id.nav_host_fragment, addReportFragment, addReportFragment.getTag())
