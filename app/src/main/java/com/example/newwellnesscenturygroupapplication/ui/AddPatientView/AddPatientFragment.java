@@ -138,32 +138,20 @@ public class AddPatientFragment extends Fragment {
                     int pId = myDBHelper.createPatient(pName, pDob, pPhone, pEmail, pAddress, pMin);
                     if (pId != -1) {
                         clearInputs();
-                        //textView.setText("69");
 
                         Report report = new Report(pId, "");
+                        int rId = myDBHelper.createReport(report);
 
-                        myDBHelper.createReport(report);
+                        AddReportFragment addReportFragment = new AddReportFragment();
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("pId", pId);
+                        bundle.putInt("rId", rId);
+                        addReportFragment.setArguments(bundle);
+                        FragmentManager manager = getParentFragmentManager();
+                        manager.beginTransaction().replace(R.id.nav_host_fragment, addReportFragment, addReportFragment.getTag())
+                                .commit();
 
-//                    AddReportFragment addReportFragment = new AddReportFragment();
-//                    Bundle bundle = new Bundle();
-//                    bundle.putInt("pId", pId);
-//                    addReportFragment.setArguments(bundle);
-//                    FragmentManager manager = getParentFragmentManager();
-//                    manager.beginTransaction().replace(R.id.nav_host_fragment, addReportFragment, addReportFragment.getTag())
-//                            .commit();
                     }
-                }
-
-                    int rId = myDBHelper.createReport(report);
-
-                    AddReportFragment addReportFragment = new AddReportFragment();
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("pId", pId);
-                    bundle.putInt("rId", rId);
-                    addReportFragment.setArguments(bundle);
-                    FragmentManager manager = getParentFragmentManager();
-                    manager.beginTransaction().replace(R.id.nav_host_fragment, addReportFragment, addReportFragment.getTag())
-                            .commit();
                 }
             }
         });
