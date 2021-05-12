@@ -99,7 +99,7 @@ public class AddPatientFragment extends Fragment {
 
                 String errorMsg = "";
                 if(pName.isEmpty()
-                        ||!Pattern.matches("^([A-Z]|[a-z])*$", pName) && !pName.isEmpty()
+                        ||!Pattern.matches("^([A-Z]|[a-z]| )*$", pName) && !pName.isEmpty()
                         ||pDob.isEmpty()
                         ||!Pattern.matches("[0-9]{3}[0-9]{3}[0-9]{4}", pPhone)
                         ||!Pattern.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", pEmail)
@@ -109,7 +109,7 @@ public class AddPatientFragment extends Fragment {
                         errorMsg += "Name input is empty.\n\n";
                         error.setText(errorMsg);
                     }
-                    if (!Pattern.matches("^([A-Z]|[a-z])*$", pName) && !pName.isEmpty()) {
+                    if (!Pattern.matches("^([A-Z]|[a-z]| )*$", pName) && !pName.isEmpty()) {
                         errorMsg += "Name should be only composed of characters\n\n";
                         error.setText(errorMsg);
                     }
