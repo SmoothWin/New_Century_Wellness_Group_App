@@ -56,7 +56,7 @@ public class AddReportFragment extends Fragment {
                 reportId = myDBHelper.updateReport(report);
 
                 if(reportId != -1){
-                    showToast("New report created with reportId: " + reportId + " for patientId: " + patientId);
+                    //showToast("New report created with reportId: " + reportId + " for patientId: " + patientId);
 
                     HomeFragment homeFragment = new HomeFragment();
                     FragmentManager manager = getParentFragmentManager();

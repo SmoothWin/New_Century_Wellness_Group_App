@@ -335,21 +335,5 @@ public class MyDBHelper extends SQLiteOpenHelper {
 
     }
 
-    public int deleteReport(int reportId){
 
-        try{
-
-            sqLiteDatabase = this.getWritableDatabase();
-
-            //int deletedReportRowId = sqLiteDatabase.update(REPORT_TABLE, )
-
-            return -1;
-
-        }
-        catch(SQLException e){
-            showToast("SQL Exception caught: " + e.getMessage());
-            return -1;
-        }
-
-    }
 }

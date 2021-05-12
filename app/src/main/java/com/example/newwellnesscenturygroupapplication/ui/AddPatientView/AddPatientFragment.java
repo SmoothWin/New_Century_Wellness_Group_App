@@ -191,6 +191,11 @@ public class AddPatientFragment extends Fragment {
         return root;
     }
 
+    public static Fragment newInstance(){
+        AddPatientFragment addPatientFragment = new AddPatientFragment();
+        return addPatientFragment;
+    }
+
     private void clearInputs() {
         nameEdt.setText("");
         dobEdt.setText("");
