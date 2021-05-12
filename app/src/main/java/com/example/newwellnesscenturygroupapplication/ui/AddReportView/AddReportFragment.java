@@ -16,6 +16,24 @@ import com.example.newwellnesscenturygroupapplication.R;
 public class AddReportFragment extends Fragment {
 
 
+    /*
+
+
+
+
+
+
+    //-----------------------------------DEPRECATED--------------------------------------//
+
+
+
+
+
+
+
+
+    */
+
     EditText editText;
 
     private AddReportViewModel AddReportViewModel;

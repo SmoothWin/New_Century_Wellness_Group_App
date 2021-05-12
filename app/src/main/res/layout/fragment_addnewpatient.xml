@@ -25,23 +25,16 @@
 
     <!-- ============ First Name ================ -->
     <EditText
-        android:id="@+id/firstName_edt"
+        android:id="@+id/name_edt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Enter first name:" >
+        android:hint="Enter name:">
+
         <requestFocus />
     </EditText>
 
     <!-- ============ Last Name ================ -->
-    <EditText
-        android:id="@+id/lastName_edt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Enter last name:" >
-        <requestFocus />
-    </EditText>
 
     <!-- ============ Date of birth ================ -->
     <EditText
@@ -80,16 +73,16 @@
     </EditText>
 
     <!-- ============ MIN ================ -->
+
     <EditText
         android:id="@+id/min_edt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Enter medical insurance number (MIN):" >
-    </EditText>
+        android:hint="Enter medical insurance number (MIN):"></EditText>
 
     <Button
-        android:id="@+id/add_record"
+        android:id="@+id/add_patient"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

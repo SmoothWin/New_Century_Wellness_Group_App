@@ -30,12 +30,22 @@
         android:layout_marginLeft="20dp"
         android:layout_marginBottom="20dp"
         android:background="@color/searchbar"
-        android:queryHint="Search patient or report"></SearchView>
+        android:queryHint="Search patient or report">
+
+    </SearchView>
+
+    <Button
+        android:id="@+id/displayAll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Button" />
 
     <ListView
         android:id="@+id/list_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:dividerHeight="1dp"
-        android:padding="10dp"></ListView>
+        android:padding="10dp">
+
+    </ListView>
 </LinearLayout>
