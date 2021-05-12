@@ -1,11 +1,13 @@
 package com.example.newwellnesscenturygroupapplication.ui.AddPatientView;
 
+import android.app.DatePickerDialog;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,11 +15,17 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.newwellnesscenturygroupapplication.MyDBHelper;
+import com.example.newwellnesscenturygroupapplication.da.MyDBHelper;
 import com.example.newwellnesscenturygroupapplication.R;
+import com.example.newwellnesscenturygroupapplication.da.Patient;
+import com.example.newwellnesscenturygroupapplication.da.Report;
+import com.example.newwellnesscenturygroupapplication.ui.AddReportView.AddReportFragment;
+
+import java.sql.Date;
 
 public class AddPatientFragment extends Fragment {
 
@@ -38,7 +46,9 @@ public class AddPatientFragment extends Fragment {
 
 
     //------------- Button parameters --------------\\
-    Button addPatient;
+    Button addPatient, selectDateButton;
+
+    private DatePickerDialog datePickerDialog;
 
     Toast toast;
 
@@ -47,6 +57,8 @@ public class AddPatientFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
             ViewGroup container, Bundle savedInstanceState) {
         AddPatientViewModel = new ViewModelProvider(this).get(AddPatientViewModel.class);
+
+
 
         //------------- Get the root link --------------\\
         View root = inflater.inflate(R.layout.fragment_addnewpatient, container, false);
@@ -57,41 +69,77 @@ public class AddPatientFragment extends Fragment {
         //------------- Set the database connection --------------\\
         myDBHelper = new MyDBHelper(this.getContext());
         sqLiteDatabase = myDBHelper.getWritableDatabase();
-        myDBHelper.onUpgrade(sqLiteDatabase, 1, 2);
+        //myDBHelper.onUpgrade(sqLiteDatabase, 1, 2);
 
 
         //------------- Set the EditText --------------\\
         nameEdt = root.findViewById(R.id.name_edt);
         phoneEdt = root.findViewById(R.id.phone_edt);
-        dobEdt = root.findViewById(R.id.dob_edt);
+        dobEdt = root.findViewById(R.id.dateOfBirthEdt);
         emailEdt = root.findViewById(R.id.email_edt);
         addressEdt = root.findViewById(R.id.address_edt);
         minEdt = root.findViewById(R.id.min_edt);
 
         //------------- Set the button --------------\\
         addPatient = root.findViewById(R.id.add_patient);
-
-
-
+        selectDateButton = root.findViewById(R.id.selectDateButton);
 
         addPatient.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 String pName = nameEdt.getText().toString();
-                String pDob = dobEdt.getText().toString();
-                String pPhone = phoneEdt.getText().toString();
                 String pEmail = emailEdt.getText().toString();
+                String pPhone = phoneEdt.getText().toString();
+                Date pDob = Date.valueOf(dobEdt.getText().toString());
                 String pAddress = addressEdt.getText().toString();
                 String pMin = minEdt.getText().toString();
 
-                myDBHelper.insertTable(pName, pDob, pPhone, pEmail, pAddress, pMin);
+                Patient patient = new Patient(pName, pEmail, pPhone, pDob, pAddress, pMin);
 
-                textView.setText("69");
+                int pId = myDBHelper.createPatient(pName, pDob.toString(), pPhone, pEmail, pAddress, pMin);
 
+
+
+                if(pId != -1){
+                    clearInputs();
+                    //textView.setText("69");
+
+                    Report report = new Report(pId, "");
+
+                    myDBHelper.createReport(report);
+
+                    AddReportFragment addReportFragment = new AddReportFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("pId", pId);
+                    addReportFragment.setArguments(bundle);
+                    FragmentManager manager = getParentFragmentManager();
+                    manager.beginTransaction().replace(R.id.nav_host_fragment, addReportFragment, addReportFragment.getTag())
+                            .commit();
+                }
             }
         });
 
+        selectDateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //showToast("selectDate OnClick");
+                DatePicker datePicker = new DatePicker(getContext());
+                int currentDay = datePicker.getDayOfMonth();
+                int currentMonth = datePicker.getMonth();
+                int currentYear = datePicker.getYear();
+
+                datePickerDialog = new DatePickerDialog(getContext(),
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+
+                                dobEdt.setText(year + "-" + (month + 1) + "-" + dayOfMonth);
+                            }
+                        }, currentYear, currentMonth, currentDay);
+
+                datePickerDialog.show();
+            }
+        });
 
         AddPatientViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
@@ -99,12 +147,22 @@ public class AddPatientFragment extends Fragment {
                 textView.setText(s);
             }
         });
+
         return root;
+    }
+
+    private void clearInputs(){
+        nameEdt.setText("");
+        dobEdt.setText("");
+        phoneEdt.setText("");
+        emailEdt.setText("");
+        addressEdt.setText("");
+        minEdt.setText("");
     }
 
     private void showToast(String message)
     {
-        toast = Toast.makeText(this.getContext(), message, Toast.LENGTH_LONG);
+        Toast.makeText(this.getContext(), message, Toast.LENGTH_LONG).show();
     }
 
 
