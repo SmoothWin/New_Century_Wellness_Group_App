@@ -25,10 +25,10 @@
 
     <SearchView
         android:id="@+id/searchViewID"
-        android:layout_width="319dp"
+        android:layout_width="370dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="10dp"
         android:background="@color/searchbar"
         android:gravity="center_horizontal"
         android:queryHint="Search patient or report">

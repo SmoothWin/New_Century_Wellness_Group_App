@@ -52,7 +52,7 @@ public class AddReportFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 reportDetails = detailsEditText.getText().toString();
-                Report report = new Report(patientId,reportDetails);
+                Report report = new Report(reportId, patientId, reportDetails);
                 reportId = myDBHelper.updateReport(report);
 
                 if(reportId != -1){
@@ -79,6 +79,7 @@ public class AddReportFragment extends Fragment {
         Bundle bundle = this.getArguments();
         if(bundle != null) {
             patientId = bundle.getInt("pId");
+            reportId = bundle.getInt("rId");
         }
 
 
