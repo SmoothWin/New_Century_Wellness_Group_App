@@ -42,7 +42,6 @@ public class AddPatientFragment extends Fragment {
 
     Toast toast;
 
-
     private AddPatientViewModel AddPatientViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,

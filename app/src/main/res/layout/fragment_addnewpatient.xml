@@ -87,4 +87,5 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="Create new patient" />
+    
 </LinearLayout>
