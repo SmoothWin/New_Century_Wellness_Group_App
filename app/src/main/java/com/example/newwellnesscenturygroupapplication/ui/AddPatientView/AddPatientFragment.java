@@ -99,7 +99,7 @@ public class AddPatientFragment extends Fragment {
 
                 String errorMsg = "";
                 if(pName.isEmpty()
-                        ||!Pattern.matches("^([A-Z]|[a-z])*$", pName) && !pName.isEmpty()
+                        ||!Pattern.matches("^([A-Z]|[a-z]| )*$", pName) && !pName.isEmpty()
                         ||pDob.isEmpty()
                         ||!Pattern.matches("[0-9]{3}[0-9]{3}[0-9]{4}", pPhone)
                         ||!Pattern.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", pEmail)
@@ -109,7 +109,7 @@ public class AddPatientFragment extends Fragment {
                         errorMsg += "Name input is empty.\n\n";
                         error.setText(errorMsg);
                     }
-                    if (!Pattern.matches("^([A-Z]|[a-z])*$", pName) && !pName.isEmpty()) {
+                    if (!Pattern.matches("^([A-Z]|[a-z]| )*$", pName) && !pName.isEmpty()) {
                         errorMsg += "Name should be only composed of characters\n\n";
                         error.setText(errorMsg);
                     }
@@ -139,12 +139,15 @@ public class AddPatientFragment extends Fragment {
                     if (pId != -1)
                     {
                         clearInputs();
-                        //textView.setText("69");
 
                         Report report = new Report(pId, "");
-
                         int rId = myDBHelper.createReport(report);
 
+<<<<<<< HEAD
+                        int rId = myDBHelper.createReport(report);
+
+=======
+>>>>>>> 2495281a9fdc5f0c3db64388a5b064c0974afd8d
                         AddReportFragment addReportFragment = new AddReportFragment();
                         Bundle bundle = new Bundle();
                         bundle.putInt("pId", pId);
@@ -155,8 +158,11 @@ public class AddPatientFragment extends Fragment {
                                 .commit();
 
                     }
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 2495281a9fdc5f0c3db64388a5b064c0974afd8d
                 }
             }
         });
@@ -194,6 +200,11 @@ public class AddPatientFragment extends Fragment {
         });
 
         return root;
+    }
+
+    public static Fragment newInstance(){
+        AddPatientFragment addPatientFragment = new AddPatientFragment();
+        return addPatientFragment;
     }
 
     private void clearInputs() {

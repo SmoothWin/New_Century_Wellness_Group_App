@@ -1,5 +1,6 @@
 package com.example.newwellnesscenturygroupapplication;
 
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,10 +10,12 @@ import android.widget.SearchView;
 
 import com.example.newwellnesscenturygroupapplication.da.MyDBHelper;
 import com.example.newwellnesscenturygroupapplication.ui.AddPatientView.AddPatientFragment;
+import com.example.newwellnesscenturygroupapplication.ui.Home.HomeFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
+import android.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -41,7 +44,10 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+//                Fragment addPatientFragment = AddPatientFragment.newInstance();
+//                FragmentManager manager = getFragmentManager();
+//                manager.beginTransaction().replace(R.id.nav_host_fragment,
+//                        addPatientFragment);
             }
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -54,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_patient, R.id.nav_slideshow)
+                R.id.nav_patient, R.id.nav_home, R.id.nav_slideshow)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);

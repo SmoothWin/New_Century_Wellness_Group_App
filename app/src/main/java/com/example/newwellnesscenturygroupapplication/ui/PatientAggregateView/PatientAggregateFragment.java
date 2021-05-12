@@ -88,6 +88,8 @@ public class PatientAggregateFragment extends Fragment {
             dCreated = bundle.getString("dCreated");
         }
 
+        //showToast(String.valueOf(rId));
+
         patientIdEditText.setText(String.valueOf(pId));
         patientNameEditText.setText(pName);
         patientDobEditText.setText(String.valueOf(pDob));
@@ -110,7 +112,7 @@ public class PatientAggregateFragment extends Fragment {
                 int affectedPatientRow = myDBHelper.updatePatient(patient);
 
                 if(affectedReportRow != -1 && affectedPatientRow != -1){
-                    showToast("Sucessfully updated Report with reportId: " + affectedReportRow);
+                    //showToast("Sucessfully updated Report with reportId: " + affectedReportRow);
 
                     HomeFragment homeFragment = new HomeFragment();
                     FragmentManager manager = getParentFragmentManager();
@@ -128,8 +130,22 @@ public class PatientAggregateFragment extends Fragment {
         deleteReportButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showToast("PatientAggregate : deleteClick : notImplemented");
+                //showToast("PatientAggregate : deleteClick : notImplemented");
 
+                Report report = new Report(rId, pId, "");
+
+                int reportRowId = myDBHelper.updateReport(report);
+
+                if(reportRowId != -1){
+                    HomeFragment homeFragment = new HomeFragment();
+                    FragmentManager manager = getParentFragmentManager();
+                    manager.beginTransaction().replace(R.id.nav_host_fragment,
+                            homeFragment, homeFragment.getTag())
+                            .commit();
+                }
+                else{
+                    showToast("An error occured while trying to update the report.");
+                }
 
             }
         });
