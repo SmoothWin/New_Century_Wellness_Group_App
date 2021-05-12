@@ -22,6 +22,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.newwellnesscenturygroupapplication.da.MyDBHelper;
 import com.example.newwellnesscenturygroupapplication.R;
 import com.example.newwellnesscenturygroupapplication.da.Patient;
+import com.example.newwellnesscenturygroupapplication.da.Report;
 import com.example.newwellnesscenturygroupapplication.ui.AddReportView.AddReportFragment;
 
 import java.sql.Date;
@@ -75,7 +76,7 @@ public class AddPatientFragment extends Fragment {
         //------------- Set the EditText --------------\\
         nameEdt = root.findViewById(R.id.name_edt);
         phoneEdt = root.findViewById(R.id.phone_edt);
-        dobEdt = root.findViewById(R.id.dob_edt);
+        dobEdt = root.findViewById(R.id.dateOfBirthEdt);
         emailEdt = root.findViewById(R.id.email_edt);
         addressEdt = root.findViewById(R.id.address_edt);
         minEdt = root.findViewById(R.id.min_edt);
@@ -103,6 +104,10 @@ public class AddPatientFragment extends Fragment {
                 if(pId != -1){
                     clearInputs();
                     //textView.setText("69");
+
+                    Report report = new Report(pId, "");
+
+                    myDBHelper.createReport(report);
 
                     AddReportFragment addReportFragment = new AddReportFragment();
                     Bundle bundle = new Bundle();

@@ -26,6 +26,7 @@ import com.example.newwellnesscenturygroupapplication.da.Patient;
 import com.example.newwellnesscenturygroupapplication.da.Report;
 import com.example.newwellnesscenturygroupapplication.ui.PatientAggregateView.PatientAggregateFragment;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -137,6 +138,7 @@ public class HomeFragment extends Fragment {
                 Bundle bundle = new Bundle();
                 bundle.putInt("pId", patient.getPatientId());
                 bundle.putString("pName", patient.getName());
+                bundle.putString("pDob", patient.getDateOfBirth().toString());
                 bundle.putString("dModified", report.getDateModified().toString());
                 bundle.putString("dCreated", report.getDateCreated().toString());
                 bundle.putString("details", report.getDetails());

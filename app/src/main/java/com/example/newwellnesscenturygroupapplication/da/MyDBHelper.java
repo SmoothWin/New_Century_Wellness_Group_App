@@ -187,6 +187,29 @@ public class MyDBHelper extends SQLiteOpenHelper {
     }
 
 
+    public int updatePatient(Patient patient){
+        try{
+
+            ContentValues patientValues = new ContentValues();
+            patientValues.put(NAME, patient.getName());
+            patientValues.put(EMAIL, patient.getEmail());
+            patientValues.put(PHONE_NUMBER, patient.getPhoneNumber());
+            patientValues.put(DOB, patient.getDateOfBirth().toString());
+            patientValues.put(ADDRESS, patient.getAddress());
+            patientValues.put(MIN, patient.getMIN());
+
+            sqLiteDatabase = this.getWritableDatabase();
+
+            int patientRowId = sqLiteDatabase.update(PATIENT_TABLE, patientValues, patient_ID + "=?", new String[] {String.valueOf(patient.getPatientId())});
+
+            return patientRowId;
+
+        }
+        catch(SQLException e){
+            showToast("SQL Exception caught: " + e.getMessage());
+            return -1;
+        }
+    }
 
     public Cursor getAllPatients()
     {
@@ -303,6 +326,24 @@ public class MyDBHelper extends SQLiteOpenHelper {
             int reportRowId = sqLiteDatabase.update(REPORT_TABLE, reportValues, report_ID + "=?", new String[] {String.valueOf(report.getReportId())});
 
             return reportRowId;
+
+        }
+        catch(SQLException e){
+            showToast("SQL Exception caught: " + e.getMessage());
+            return -1;
+        }
+
+    }
+
+    public int deleteReport(int reportId){
+
+        try{
+
+            sqLiteDatabase = this.getWritableDatabase();
+
+            //int deletedReportRowId = sqLiteDatabase.update(REPORT_TABLE, )
+
+            return -1;
 
         }
         catch(SQLException e){

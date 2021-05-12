@@ -34,6 +34,12 @@ public class Patient {
         this.MIN = MIN;
     }
 
+    public Patient(int patientId, String name, Date dateOfBirth) {
+        this.patientId = patientId;
+        this.name = name;
+        this.dateOfBirth = dateOfBirth;
+    }
+
     public Date getDateOfBirth() {
         return dateOfBirth;
     }

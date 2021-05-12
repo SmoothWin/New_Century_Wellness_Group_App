@@ -53,7 +53,7 @@ public class AddReportFragment extends Fragment {
             public void onClick(View v) {
                 reportDetails = detailsEditText.getText().toString();
                 Report report = new Report(patientId,reportDetails);
-                reportId = myDBHelper.createReport(report);
+                reportId = myDBHelper.updateReport(report);
 
                 if(reportId != -1){
                     showToast("New report created with reportId: " + reportId + " for patientId: " + patientId);
