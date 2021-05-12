@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -15,12 +16,17 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.newwellnesscenturygroupapplication.MyDBHelper;
+import com.example.newwellnesscenturygroupapplication.da.MyDBHelper;
 import com.example.newwellnesscenturygroupapplication.R;
+import com.example.newwellnesscenturygroupapplication.da.Patient;
+import com.example.newwellnesscenturygroupapplication.da.Report;
+import com.example.newwellnesscenturygroupapplication.ui.PatientAggregateView.PatientAggregateFragment;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +45,9 @@ public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
 
+
+
+
     public View onCreateView(@NonNull LayoutInflater inflater,
             ViewGroup container, Bundle savedInstanceState)
     {
@@ -55,15 +64,15 @@ public class HomeFragment extends Fragment {
         //------------- Set the database connection --------------\\
         myDBHelper = new MyDBHelper(this.getContext());
         sqLiteDatabase = myDBHelper.getWritableDatabase();
-        myDBHelper.onUpgrade(sqLiteDatabase, 1, 2);
+        //myDBHelper.onUpgrade(sqLiteDatabase, 1, 2);
 
 
         //------------- Setup ArrayList --------------\\
 
         PatientList = new ArrayList<String>();
-        Cursor resultSet = myDBHelper.displayAllData();
+        Cursor resultSet = myDBHelper.getAllPatients();
         if (resultSet.getCount()==0){
-            showToast("Error");
+            showToast("Called getAllPatients() got 0 results");
 
         }
         else
@@ -113,13 +122,57 @@ public class HomeFragment extends Fragment {
             }
 
         });
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                PatientAggregateFragment patientAggregateFragment = new PatientAggregateFragment();
+
+                String patientIdStr = (String)parent.getItemAtPosition(position);
+                int patientId = Integer.valueOf(patientIdStr.substring(0, patientIdStr.indexOf('|') - 1));
+                //showToast(String.valueOf(patientId));
+
+                Patient patient = myDBHelper.getPatient(patientId);
+                Report report  = myDBHelper.getReport(patientId);
+
+                Bundle bundle = new Bundle();
+                bundle.putInt("pId", patient.getPatientId());
+                bundle.putString("pName", patient.getName());
+                bundle.putString("pDob", patient.getDateOfBirth().toString());
+                bundle.putString("dModified", report.getDateModified().toString());
+                bundle.putString("dCreated", report.getDateCreated().toString());
+                bundle.putString("details", report.getDetails());
+                bundle.putInt("rId", report.getReportId());
+
+                patientAggregateFragment.setArguments(bundle);
+                FragmentManager manager = getParentFragmentManager();
+                manager.beginTransaction().replace(R.id.nav_host_fragment,
+                        patientAggregateFragment, patientAggregateFragment.getTag())
+                        .commit();
+
+            }
+        });
+
         return root;
     }
 
 
+    @Override
+    public void onResume() {
+        //showToast("Home : onResume");
+        super.onResume();
+    }
+
+    @Override
+    public void onDestroy() {
+
+        myDBHelper.close();
+        super.onDestroy();
+    }
+
 
     private void showToast(String message)
     {
-        toast = Toast.makeText(this.getContext(), message, Toast.LENGTH_LONG);
+        Toast.makeText(this.getContext(), message, Toast.LENGTH_LONG).show();
     }
 }

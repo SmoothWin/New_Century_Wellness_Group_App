@@ -28,20 +28,22 @@
         android:id="@+id/patientID_edt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:editable="false"
         android:ems="10"
-        android:hint="Enter patient ID:" >
+        android:hint="Enter patient ID:">
+
         <requestFocus />
     </EditText>
 
     <!-- ============ Date Modified ================ -->
-    <EditText
-        android:id="@+id/dateModified_edt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Enter date:" >
-        <requestFocus />
-    </EditText>
+<!--    <EditText-->
+<!--        android:id="@+id/dateModified_edt"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:ems="10"-->
+<!--        android:hint="Enter date:" >-->
+<!--        <requestFocus />-->
+<!--    </EditText>-->
 
     <!-- ============ Details ================ -->
     <EditText
@@ -55,9 +57,10 @@
     </EditText>
 
     <Button
-        android:id="@+id/add_patient"
+        android:id="@+id/add_report"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:onClick="onClick"
         android:text="Create Report" />
 </LinearLayout>
