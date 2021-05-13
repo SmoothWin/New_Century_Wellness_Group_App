@@ -11,6 +11,11 @@
     <string name="add_patient">Add Patient</string>
     <string name="about_us">About Us</string>
 
+    <string name="JCB">Jean-Christophe Benoit</string>
+    <string name="CC">Christian Chitanu</string>
+    <string name="LP">Louis-Philippe Simard</string>
+
+
 
     <!-- Array for listView testing (not official) -->
     <string-array name="car_names">
