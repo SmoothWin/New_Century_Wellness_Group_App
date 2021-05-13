@@ -1,6 +1,7 @@
 package com.example.newwellnesscenturygroupapplication.ui.PatientAggregateView;
 
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
@@ -132,20 +134,45 @@ public class PatientAggregateFragment extends Fragment {
             public void onClick(View v) {
                 //showToast("PatientAggregate : deleteClick : notImplemented");
 
-                Report report = new Report(rId, pId, "");
 
-                int reportRowId = myDBHelper.updateReport(report);
+                AlertDialog.Builder alBuilder;
+                alBuilder=new AlertDialog.Builder(getContext());
+                alBuilder.setIcon(R.drawable.question);
+                alBuilder.setTitle("Delete Alert");
+                alBuilder.setMessage("Are you sure you want to delete this report?");
+                alBuilder.setCancelable(false);
 
-                if(reportRowId != -1){
-                    HomeFragment homeFragment = new HomeFragment();
-                    FragmentManager manager = getParentFragmentManager();
-                    manager.beginTransaction().replace(R.id.nav_host_fragment,
-                            homeFragment, homeFragment.getTag())
-                            .commit();
-                }
-                else{
-                    showToast("An error occured while trying to update the report.");
-                }
+                alBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Report report = new Report(rId, pId, "");
+
+                        int reportRowId = myDBHelper.updateReport(report);
+
+                        if(reportRowId != -1){
+                            HomeFragment homeFragment = new HomeFragment();
+                            FragmentManager manager = getParentFragmentManager();
+                            manager.beginTransaction().replace(R.id.nav_host_fragment,
+                                    homeFragment, homeFragment.getTag())
+                                    .commit();
+                        }
+                        else{
+                            showToast("An error occured while trying to update the report.");
+                        }
+                    }
+                });
+
+                alBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+                AlertDialog alertDialog = alBuilder.create();
+                alertDialog.show();
+
+
 
             }
         });
