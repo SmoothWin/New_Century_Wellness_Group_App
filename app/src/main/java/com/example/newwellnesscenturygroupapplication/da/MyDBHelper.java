@@ -318,8 +318,15 @@ public class MyDBHelper extends SQLiteOpenHelper {
 
         try{
 
+            long millis = System.currentTimeMillis();
+
             ContentValues reportValues = new ContentValues();
             reportValues.put(DETAILS, report.getDetails());
+            reportValues.put(DATE_MODIFIED, String.valueOf(new Date(millis)));
+
+            if(report.getDetails().length() == 0){
+                reportValues.put(DATE_CREATED, String.valueOf(new Date(millis)));
+            }
 
             sqLiteDatabase = this.getWritableDatabase();
 
