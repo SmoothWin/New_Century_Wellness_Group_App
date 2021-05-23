@@ -143,11 +143,6 @@ public class AddPatientFragment extends Fragment {
                         Report report = new Report(pId, "");
                         int rId = myDBHelper.createReport(report);
 
-<<<<<<< HEAD
-                        int rId = myDBHelper.createReport(report);
-
-=======
->>>>>>> 2495281a9fdc5f0c3db64388a5b064c0974afd8d
                         AddReportFragment addReportFragment = new AddReportFragment();
                         Bundle bundle = new Bundle();
                         bundle.putInt("pId", pId);
@@ -158,11 +153,6 @@ public class AddPatientFragment extends Fragment {
                                 .commit();
 
                     }
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 2495281a9fdc5f0c3db64388a5b064c0974afd8d
                 }
             }
         });
